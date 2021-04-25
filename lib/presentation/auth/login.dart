@@ -1,38 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'dart:math' as math;
 
 import 'package:udalogin/presentation/constants/comp.dart';
+import 'package:udalogin/presentation/constants/header.dart';
 
-class PageLogin extends StatefulWidget {
-  @override
-  _PageLoginState createState() => _PageLoginState();
-}
-
-class _PageLoginState extends State<PageLogin>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-        value: 0.0,
-        duration: Duration(seconds: 10),
-        upperBound: 1,
-        lowerBound: -1,
-        vsync: this)
-      ..repeat();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
+class PageLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size; //decoreate height and width
+    var size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
@@ -48,61 +23,21 @@ class _PageLoginState extends State<PageLogin>
         ),
       ),
       body: Container(
+        alignment: Alignment.center,
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  AnimatedBuilder(
-                    animation: _controller,
-                    child: Container(
-                      height: size.height * 0.3,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.bottomLeft,
-                          end: Alignment.topRight,
-                          colors: <Color>[
-                            Colors.orange.shade800,
-                            Colors.amber.shade400,
-                          ],
-                        ),
-                      ),
-                    ),
-                    builder: (BuildContext context, child) {
-                      return ClipPath(
-                        clipper: DrawClipt(_controller.value),
-                        child: child,
-                      );
-                    },
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(bottom: 60),
-                    child: Text(
-                      'Peach',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 46,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    'Your money is safe',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
+              HeaderClipPath(),
               CompanyName(),
               Container(
-                width: size.width * 0.8,
+                width: size.width * 0.9,
                 margin: EdgeInsets.only(top: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     text("Email id"),
                     SizedBox(height: 10),
-                    input('Email'),
+                    input('Email', isPass: false),
                     SizedBox(height: 10),
                     text("Password"),
                     SizedBox(height: 10),
@@ -168,7 +103,7 @@ class _PageLoginState extends State<PageLogin>
                         ],
                       ),
                     ),
-                    SizedBox(height: 50),
+                    SizedBox(height: 30),
                     MaterialButton(
                       onPressed: () {},
                       color: Colors.blue.shade900,
@@ -205,7 +140,26 @@ class _PageLoginState extends State<PageLogin>
                         ],
                       ),
                     ),
-                    SizedBox(height: 50),
+                    SizedBox(height: 30),
+                    Container(
+                      margin: EdgeInsets.only(top: 18),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Dont have an account ?'),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pushNamed('/register');
+                            },
+                            child: Text(
+                              ' Register',
+                              style: TextStyle(color: Colors.orange),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 30),
                   ],
                 ),
               ),
@@ -217,38 +171,13 @@ class _PageLoginState extends State<PageLogin>
   }
 }
 
-class DrawClipt extends CustomClipper<Path> {
-  double move = 0;
-  double slice = math.pi;
-  DrawClipt(this.move);
-
-  @override
-  Path getClip(Size size) {
-    // print(move);
-    Path path = Path();
-    path.lineTo(0, size.height * 0.8);
-    double xCenter =
-        size.width * 0.5 + (size.width * 0.6) * math.sin(move * slice);
-    double yCenter = size.height * 0.8 + 69 * math.cos(move * slice);
-
-    path.quadraticBezierTo(xCenter, yCenter, size.width, size.height * 0.8);
-    path.lineTo(size.width, 0);
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return true;
-  }
-}
-
 Widget text(String text) {
   return Text(text, style: TextStyle(fontWeight: FontWeight.bold));
 }
 
 Widget input(String hint, {bool isPass = false}) {
   return TextField(
-    keyboardType: isPass ? TextInputType.emailAddress : null,
+    keyboardType: isPass == false ? TextInputType.emailAddress : null,
     obscureText: isPass,
     decoration: InputDecoration(
       hintText: hint,

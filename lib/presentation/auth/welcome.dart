@@ -41,9 +41,7 @@ class Welcome extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 50,
-                ),
+                SizedBox(height: 70),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pushNamed('/login');
@@ -65,9 +63,7 @@ class Welcome extends StatelessWidget {
                     // padding: EdgeInsets.symmetric(horizontal: 100),
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pushNamed('/register');
@@ -90,24 +86,18 @@ class Welcome extends StatelessWidget {
                     // padding: EdgeInsets.symmetric(horizontal: 100),
                   ),
                 ),
-                SizedBox(
-                  height: 50,
-                ),
+                SizedBox(height: 50),
                 Text(
                   "Quick login with Touch ID",
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
                 Icon(
                   Icons.fingerprint,
                   color: Colors.white,
                   size: 70,
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
                 Text(
                   "Touch ID",
                   style: TextStyle(
