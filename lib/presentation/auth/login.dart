@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:math' as math;
+
+import 'package:udalogin/presentation/constants/comp.dart';
 
 class PageLogin extends StatefulWidget {
   @override
@@ -90,64 +93,122 @@ class _PageLoginState extends State<PageLogin>
                   ),
                 ],
               ),
-              Text(
-                'Sign in to continue',
-                style: TextStyle(fontSize: 16),
-              ),
+              CompanyName(),
               Container(
                 width: size.width * 0.8,
-                margin: EdgeInsets.only(top: 18),
+                margin: EdgeInsets.only(top: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Email id"),
-                    input('Username'),
-                  ],
-                ),
-              ),
-              Container(
-                width: size.width * 0.8,
-                margin: EdgeInsets.only(top: 18),
-                child: input('Password', isPass: true),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 18),
-                child: GestureDetector(
-                  onTap: () {},
-                  child: Text('I dont remember my password'),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 36),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Center(
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: Text(
-                            "Your dont have the account?",
-                            style: TextStyle(
-                                color: Color(0xFFACACAC), fontSize: 14),
+                    text("Email id"),
+                    SizedBox(height: 10),
+                    input('Email'),
+                    SizedBox(height: 10),
+                    text("Password"),
+                    SizedBox(height: 10),
+                    input('Password', isPass: true),
+                    SizedBox(height: 20),
+                    Container(
+                      height: 50.0,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(80.0)),
+                          padding: EdgeInsets.all(0.0),
+                        ),
+                        child: Ink(
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: <Color>[
+                                  Colors.amber.shade400,
+                                  Colors.orange
+                                ],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ),
+                              borderRadius: BorderRadius.circular(5.0)),
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Login",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                    Expanded(
-                      child: Center(
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: Text(
-                            "Register",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                        ),
+                    Container(
+                      alignment: Alignment.centerRight,
+                      margin: EdgeInsets.only(top: 18),
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Text('Forgot Password ?'),
                       ),
                     ),
+                    Container(
+                      padding: EdgeInsets.only(top: 30),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                                margin:
+                                    EdgeInsets.only(left: 10.0, right: 10.0),
+                                child: Divider()),
+                          ),
+                          Text("or"),
+                          Expanded(
+                            child: Container(
+                                margin:
+                                    EdgeInsets.only(left: 10.0, right: 10.0),
+                                child: Divider()),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 50),
+                    MaterialButton(
+                      onPressed: () {},
+                      color: Colors.blue.shade900,
+                      minWidth: double.infinity,
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 0),
+                            child: Container(
+                              alignment: Alignment.topCenter,
+                              child: SvgPicture.asset(
+                                'images/social/facebook-app.svg',
+                                width: 20.0,
+                                height: 20.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Container(
+                            child: Text(
+                              'Log in with Facebook',
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.white),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 50),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -181,22 +242,26 @@ class DrawClipt extends CustomClipper<Path> {
   }
 }
 
+Widget text(String text) {
+  return Text(text, style: TextStyle(fontWeight: FontWeight.bold));
+}
+
 Widget input(String hint, {bool isPass = false}) {
   return TextField(
+    keyboardType: isPass ? TextInputType.emailAddress : null,
     obscureText: isPass,
     decoration: InputDecoration(
       hintText: hint,
       hintStyle: TextStyle(color: Color(0xFFACACAC), fontSize: 14),
-      fillColor: null,
-      // contentPadding: EdgeInsets.only(top: 20, bottom: 20, left: 38),
+      filled: true,
+      fillColor: Colors.grey.shade200,
       enabledBorder: OutlineInputBorder(
-        gapPadding: 1.0,
-        borderSide: BorderSide(color: Color(0xFFF1F1F1)),
-        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        borderSide: BorderSide(color: Colors.grey.shade100),
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Color(0xFFC7C7C7)),
-        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        borderSide: BorderSide(color: Colors.grey),
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
       ),
     ),
   );
