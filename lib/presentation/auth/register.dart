@@ -48,7 +48,9 @@ class PageRegister extends StatelessWidget {
                     Container(
                       height: 50.0,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          print('register');
+                        },
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
                           shape: RoundedRectangleBorder(

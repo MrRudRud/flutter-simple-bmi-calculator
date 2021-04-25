@@ -46,7 +46,9 @@ class PageLogin extends StatelessWidget {
                     Container(
                       height: 50.0,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          print('login');
+                        },
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
                           shape: RoundedRectangleBorder(
@@ -79,7 +81,9 @@ class PageLogin extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       margin: EdgeInsets.only(top: 18),
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          print('forgot password');
+                        },
                         child: Text('Forgot Password ?'),
                       ),
                     ),
@@ -105,7 +109,9 @@ class PageLogin extends StatelessWidget {
                     ),
                     SizedBox(height: 30),
                     MaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        print('login Facebook');
+                      },
                       color: Colors.blue.shade900,
                       minWidth: double.infinity,
                       padding: EdgeInsets.symmetric(vertical: 16),
