@@ -9,6 +9,9 @@ class PageLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
+    TextEditingController _username = new TextEditingController();
+    TextEditingController _password = new TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -37,17 +40,23 @@ class PageLogin extends StatelessWidget {
                   children: [
                     text("Email id"),
                     SizedBox(height: 10),
-                    input('Email', isPass: false),
+                    input('Email', _username, null, isPass: false),
                     SizedBox(height: 10),
                     text("Password"),
                     SizedBox(height: 10),
-                    input('Password', isPass: true),
+                    input('Password', null, _password, isPass: true),
                     SizedBox(height: 20),
                     Container(
                       height: 50.0,
                       child: ElevatedButton(
                         onPressed: () {
-                          print('login');
+                          // print(_username.text);
+                          if (_password.text == 'admin' &&
+                              _username.text == 'admin') {
+                            Navigator.of(context).pushNamed('/bmicalc');
+                          } else {
+                            print('false');
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
@@ -181,10 +190,11 @@ Widget text(String text) {
   return Text(text, style: TextStyle(fontWeight: FontWeight.bold));
 }
 
-Widget input(String hint, {bool isPass = false}) {
+Widget input(String hint, _username, _password, {bool isPass = false}) {
   return TextField(
-    keyboardType: isPass == false ? TextInputType.emailAddress : null,
+    keyboardType: isPass ? null : TextInputType.emailAddress,
     obscureText: isPass,
+    controller: isPass ? _password : _username,
     decoration: InputDecoration(
       hintText: hint,
       hintStyle: TextStyle(color: Color(0xFFACACAC), fontSize: 14),

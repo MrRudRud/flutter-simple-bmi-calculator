@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:udalogin/presentation/auth/login.dart';
 import 'package:udalogin/presentation/auth/register.dart';
+import 'package:udalogin/presentation/bmi/bmi.dart';
 
 import 'presentation/auth/welcome.dart';
 
@@ -20,8 +21,9 @@ class MyApp extends StatelessWidget {
       ),
       home: Welcome(),
       routes: {
-        '/login': (context) => PageLogin(),
+        '/login': (BuildContext context) => PageLogin(),
         '/register': (BuildContext context) => PageRegister(),
+        '/bmicalc': (BuildContext context) => BmiCalc(),
       },
     );
   }
