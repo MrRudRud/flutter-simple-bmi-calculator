@@ -4,14 +4,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:udalogin/presentation/constants/comp.dart';
 import 'package:udalogin/presentation/constants/header.dart';
 
-class PageLogin extends StatelessWidget {
+class PageLogin extends StatefulWidget {
+  @override
+  _PageLoginState createState() => _PageLoginState();
+}
+
+class _PageLoginState extends State<PageLogin> {
+  TextEditingController _username = TextEditingController();
+  TextEditingController _password = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-
-    TextEditingController _username = new TextEditingController();
-    TextEditingController _password = new TextEditingController();
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -38,9 +42,9 @@ class PageLogin extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    text("Email id"),
+                    text("Username"),
                     SizedBox(height: 10),
-                    input('Email', _username, null, isPass: false),
+                    input('Username', _username, null, isPass: false),
                     SizedBox(height: 10),
                     text("Password"),
                     SizedBox(height: 10),

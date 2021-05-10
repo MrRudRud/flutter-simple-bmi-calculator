@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:udalogin/presentation/auth/login.dart';
 import 'package:udalogin/presentation/auth/register.dart';
-import 'package:udalogin/presentation/bmi/bmi.dart';
+import 'package:udalogin/presentation/bmi/bmi_calc.dart';
 
 import 'presentation/auth/welcome.dart';
 
