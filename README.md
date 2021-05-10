@@ -1,6 +1,6 @@
-# udalogin
+# Simple BMI
 
-A new Flutter project.
+Task 2 Simple BMI and Simple Login.
 
 ## Getting Started
 
