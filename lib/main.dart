@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Welcome(),
       routes: {
+        '/home': (BuildContext context) => Welcome(),
         '/login': (BuildContext context) => PageLogin(),
         '/register': (BuildContext context) => PageRegister(),
         '/bmicalc': (BuildContext context) => BmiCalc(),

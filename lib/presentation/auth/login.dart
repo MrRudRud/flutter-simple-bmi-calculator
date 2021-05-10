@@ -59,7 +59,7 @@ class _PageLoginState extends State<PageLogin> {
                               _username.text == 'admin') {
                             Navigator.of(context).pushNamed('/bmicalc');
                           } else {
-                            print('false');
+                            Navigator.of(context).pushNamed('/home');
                           }
                         },
                         style: ElevatedButton.styleFrom(

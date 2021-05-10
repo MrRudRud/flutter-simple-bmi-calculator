@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:udalogin/presentation/auth/login.dart';
+// import 'package:udalogin/presentation/auth/login.dart';
 
 class BmiCalc extends StatefulWidget {
   @override
@@ -11,7 +11,6 @@ class _BmiCalcState extends State<BmiCalc> {
   TextEditingController _weightController = TextEditingController();
 
   double _result = 0;
-  double _height = 0, _weight = 0;
   String _category = "";
 
   @override
@@ -19,18 +18,16 @@ class _BmiCalcState extends State<BmiCalc> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text('BMI Calculator'),
+        title: Text('Simple BMI Calculator'),
         automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Colors.orange,
         actions: [
-          InkWell(
-            onTap: () {
-              // Navigator.of(context).pushNamed('/login');
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => PageLogin()));
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () {
+              Navigator.of(context).pushNamed('/login');
             },
-            child: Icon(Icons.logout),
           )
         ],
       ),
@@ -47,109 +44,115 @@ class _BmiCalcState extends State<BmiCalc> {
                 _result == 0 ? "0" : "${_result.toStringAsFixed(2)}",
                 style: TextStyle(
                   color: Colors.amber,
-                  fontSize: 50,
+                  fontSize: 40,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               Text(
                 _category == "" ? "" : '($_category)',
-                style: TextStyle(fontSize: 15),
+                style: TextStyle(fontSize: 13),
               ),
               SizedBox(height: 20),
-              Container(
-                width: size.width * 0.9,
-                margin: EdgeInsets.only(top: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    text('Tinggi Badan (Cm)'),
-                    SizedBox(height: 10),
-                    Container(
-                      margin: EdgeInsets.only(top: 10),
-                      child: TextField(
-                        controller: _heightController,
-                        decoration: InputDecoration(
-                          hintText: 'tinggi badan (cm)',
-                          hintStyle:
-                              TextStyle(color: Color(0xFFACACAC), fontSize: 14),
-                          filled: true,
-                          fillColor: Colors.grey.shade200,
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey.shade100),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(5.0)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(5.0)),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    text('Berat Badan (Kg)'),
-                    SizedBox(height: 10),
-                    Container(
-                      margin: EdgeInsets.only(top: 10),
-                      child: TextField(
-                        controller: _weightController,
-                        decoration: InputDecoration(
-                          hintText: 'berat badan (kg)',
-                          hintStyle:
-                              TextStyle(color: Color(0xFFACACAC), fontSize: 14),
-                          filled: true,
-                          fillColor: Colors.grey.shade200,
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey.shade100),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(5.0)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(5.0)),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 40),
-                    Container(
-                      height: 50.0,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          calculateBMI();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(80.0)),
-                          padding: EdgeInsets.all(0.0),
-                        ),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: <Color>[
-                                  Colors.amber.shade400,
-                                  Colors.orange
-                                ],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                              ),
-                              borderRadius: BorderRadius.circular(5.0)),
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Calculate",
-                              textAlign: TextAlign.center,
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 17),
+              Form(
+                child: Container(
+                  width: size.width * 0.9,
+                  margin: EdgeInsets.only(top: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      text('Tinggi Badan (Cm)'),
+                      SizedBox(height: 10),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: TextField(
+                          keyboardType: TextInputType.number,
+                          controller: _heightController,
+                          decoration: InputDecoration(
+                            hintText: 'tinggi badan (cm)',
+                            hintStyle: TextStyle(
+                                color: Color(0xFFACACAC), fontSize: 14),
+                            filled: true,
+                            fillColor: Colors.grey.shade200,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey.shade100),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                      SizedBox(height: 20),
+                      text('Berat Badan (Kg)'),
+                      SizedBox(height: 10),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          controller: _weightController,
+                          decoration: InputDecoration(
+                            hintText: 'berat badan (kg)',
+                            hintStyle: TextStyle(
+                                color: Color(0xFFACACAC), fontSize: 14),
+                            filled: true,
+                            fillColor: Colors.grey.shade200,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey.shade100),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 40),
+                      Container(
+                        height: 50.0,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            calculateBMI();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(80.0)),
+                            padding: EdgeInsets.all(0.0),
+                          ),
+                          child: Ink(
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: <Color>[
+                                    Colors.amber.shade400,
+                                    Colors.orange
+                                  ],
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                ),
+                                borderRadius: BorderRadius.circular(5.0)),
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Calculate",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -164,8 +167,8 @@ class _BmiCalcState extends State<BmiCalc> {
   }
 
   void calculateBMI() {
-    _height = double.parse(_heightController.text) / 100;
-    _weight = double.parse(_weightController.text);
+    double _height = double.parse(_heightController.text) / 100;
+    double _weight = double.parse(_weightController.text);
 
     double _heightSquare = _height * _height;
     double _resultBMI = _weight / _heightSquare;
@@ -177,21 +180,21 @@ class _BmiCalcState extends State<BmiCalc> {
   }
 
   void category() {
-    String _ket;
+    String _ct;
     if (_result <= 17.0) {
-      _ket = "Kurus, kurang dari 17.0";
-    } else if (_result <= 18.5) {
-      _ket = 'Kurus, Kurang Ideal';
+      _ct = "Kurus, kekurangan berat badan berat";
+    } else if (_result <= 18.4) {
+      _ct = 'Kurus, kekurangan berat badan ringan';
     } else if (_result <= 25.0) {
-      _ket = 'Normal';
-    } else if (_result <= 29) {
-      _ket = 'Gemuk';
+      _ct = 'Normal';
+    } else if (_result <= 27.0) {
+      _ct = 'Gemuk, kelebihan berat badan tingkat ringan';
     } else {
-      _ket = 'Obesitas';
+      _ct = 'Obesitas, kelebihan berat badan tingkat berat';
     }
 
     setState(() {
-      _category = _ket;
+      _category = _ct;
     });
   }
 }
