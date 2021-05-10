@@ -38,10 +38,10 @@ dev_dependencies:
 flutter_icons:
   ios: true
   android: true
-  image_path_ios: "images/launcher/dz_launcer.png"
-  image_path_android: "images/launcher/dz_launcer.png"
-  adaptive_icon_background: "images/launcher/dz_launcer.png"
-  adaptive_icon_foreground: "images/launcher/dz_launcer.png"
+  image_path_ios: "images/launcher/bmi_launcher.png"
+  image_path_android: "images/launcher/bmi_launcher.png"
+  adaptive_icon_background: "images/launcher/bmi_launcher.png"
+  adaptive_icon_foreground: "images/launcher/bmi_launcher.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
